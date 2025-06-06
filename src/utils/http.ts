@@ -6,22 +6,23 @@ import configs from '../../src/configs';
 const axiosClient = axios.create({
   baseURL: configs.VITE_WEATHER_API_BASE_URL,
   params: {
-    appid: configs.VITE_WEATHER_API_KEY,
+    units: 'metric',
+    appid: import.meta.env.VITE_WEATHER_API_KEY,
   },
 });
 
-axiosClient.interceptors.request.use(
-  (config) => {
-    const accessToken = localStorage.getItem('accessToken');
+// axiosClient.interceptors.request.use(
+//   (config) => {
+//     const accessToken = localStorage.getItem('accessToken');
 
-    if (accessToken) {
-      config.headers.Authorization = `Bearer ${accessToken}`;
-    }
+//     if (accessToken) {
+//       config.headers.Authorization = `Bearer ${accessToken}`;
+//     }
 
-    return config;
-  },
-  (error) => Promise.reject(error),
-);
+//     return config;
+//   },
+//   (error) => Promise.reject(error),
+// );
 
 axiosClient.interceptors.response.use(
   (response) => response,
